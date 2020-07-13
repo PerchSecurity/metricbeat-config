@@ -1,0 +1,15 @@
+# Module: sql
+# Docs: https://www.elastic.co/guide/en/beats/metricbeat/7.8/metricbeat-module-sql.html
+# This is 
+# PS
+
+- module: sql
+  metricsets:
+    - query
+  period: 1m
+  hosts: ["root:password@tcp(127.0.0.1:3306)/labtech"]
+
+  driver: "mysql"
+  sql_query: "select * from v_users where LoginTime >= DATE_SUB(NOW(), INTERVAL 1 MINUTE) OR LogoutTime >= DATE_SUB(NOW(), INTERVAL 1 MINUTE)"
+  sql_response_format: table
+  
