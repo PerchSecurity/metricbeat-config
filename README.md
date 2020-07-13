@@ -1,0 +1,2 @@
+# metricbeat-config
+Configs
