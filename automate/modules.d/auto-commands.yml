@@ -1,0 +1,13 @@
+# Module: sql
+# Docs: https://www.elastic.co/guide/en/beats/metricbeat/7.8/metricbeat-module-sql.html
+# PS
+
+- module: sql
+  metricsets:
+    - query
+  period: 1m
+  hosts: ["root:password@tcp(127.0.0.1:3306)/labtech"]
+
+  driver: "mysql"
+  sql_query: "SELECT clients.name as clients_name, locations.name as locations_name, computers.name as computers_name, computers.routeraddress as computers_routeraddress, computers.MAC as computers_MAC,  remotecommands.Name as remotecommands_name, remotecommands.Description as remotecommands_description, commands.* FROM commands INNER JOIN computers ON commands.ComputerID = computers.ComputerID INNER JOIN remotecommands ON remotecommands.ID = commands.Command INNER JOIN clients on computers.ClientID = clients.ClientID INNER JOIN locations on computers.LocationID = locations.LocationID WHERE commands.DateUpdated >= DATE_SUB(now(), INTERVAL 1 MINUTE)"
+  sql_response_format: table
