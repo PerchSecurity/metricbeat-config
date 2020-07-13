@@ -9,5 +9,5 @@
   hosts: ["root:password@tcp(127.0.0.1:3306)/labtech"]
 
   driver: "mysql"
-  sql_query: "select users.name, automatemultifactorsecurity.UserId, automatemultifactorsecurity.ExpirationDate, automatemultifactorsecurity.CreatedBy, automatemultifactorsecurity.CreateDate from automatemultifactorsecurity INNER JOIN users on automatemultifactorsecurity.UserID = Users.UserID where CreateDate >= DATE_SUB(DATE_SUB(now(), INTERVAL -5 HOUR), INTERVAL 1 MINUTE)"
+  sql_query: "select users.name as users_name, automatemultifactorsecurity.UserId, automatemultifactorsecurity.ExpirationDate, automatemultifactorsecurity.CreatedBy, automatemultifactorsecurity.CreateDate from automatemultifactorsecurity INNER JOIN users on automatemultifactorsecurity.UserID = Users.UserID where CreateDate >= DATE_SUB(DATE_SUB(now(), INTERVAL -5 HOUR), INTERVAL 1 MINUTE)"
   sql_response_format: table
