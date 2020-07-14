@@ -1,0 +1,13 @@
+# Module: sql
+# Docs: https://www.elastic.co/guide/en/beats/metricbeat/7.8/metricbeat-module-sql.html
+# Startup script intervals are controlled by the Automate schedule (minimum 1 hour) 
+
+- module: sql
+  metricsets:
+    - query
+  period: 60m
+  hosts: ["root:password@tcp(127.0.0.1:3306)/labtech"]
+
+  driver: "mysql"
+  sql_query: "SELECT computers.name as computers_name, autostartupdefs.Name as autostartupdefs_name, autostartup.* FROM autostartup INNER JOIN computers ON autostartup.ComputerID = computers.ComputerID INNER JOIN autostartupdefs ON autostartupdefs.AutoDefID = autostartup.AutoDefID where autostartup.Last_date >= DATE_SUB(NOW(), INTERVAL 60 MINUTE)"
+  sql_response_format: table

@@ -1,0 +1,14 @@
+# Module: sql
+# Docs: https://www.elastic.co/guide/en/beats/metricbeat/7.8/metricbeat-module-sql.html
+# This table is logging server time
+# Tested by:PS
+
+- module: sql
+  metricsets:
+    - query
+  period: 1m
+  hosts: ["root:password@tcp(127.0.0.1:3306)/labtech"]
+
+  driver: "mysql"
+  sql_query: "SELECT clients.name as clients_name, locations.name as locations_name, computers.name as computers_name, computers.routeraddress as computers_routeraddress, computers.MAC as computers_MAC, services.* from services INNER JOIN computers on services.ComputerID = computers.ComputerID INNER JOIN clients on computers.ClientID = clients.ClientID INNER JOIN locations on computers.LocationID = locations.LocationID WHERE services.Last_date >= DATE_SUB(now(), INTERVAL 1 MINUTE)"
+  sql_response_format: table

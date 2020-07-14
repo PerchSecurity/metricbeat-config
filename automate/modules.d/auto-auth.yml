@@ -1,0 +1,14 @@
+# Module: sql
+# Docs: https://www.elastic.co/guide/en/beats/metricbeat/7.8/metricbeat-module-sql.html
+# userauthlockoutstats table - auth events are 5 hours off for me. May need adjusting for you.
+# PS
+
+- module: sql
+  metricsets:
+    - query
+  period: 1m
+  hosts: ["root:password@tcp(127.0.0.1:3306)/labtech"]
+  
+  driver: "mysql"   
+  sql_query: "select userauthenticationlockoutstats.* from userauthenticationlockoutstats where UpdateDate >= DATE_SUB(DATE_SUB(now(), INTERVAL 1 MINUTE), INTERVAL -5 HOUR)"
+  sql_response_format: table
