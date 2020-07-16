@@ -1,0 +1,13 @@
+# Module: sql
+# Docs: https://www.elastic.co/guide/en/beats/metricbeat/7.8/metricbeat-module-sql.html
+# Software Inventory interval is controlled by Automate schedules. (hourly to daily)
+r
+- module: sql
+  metricsets:
+    - query
+  period: 60m
+  hosts: ["root:password@tcp(127.0.0.1:3306)/labtech"]
+
+  driver: "mysql"
+  sql_query: "select clients.name as clients_name, locations.name as locations_name, computers.ComputerID, computers.ClientID, computers.LocationID, computers.Name, computers.Domain, computers.Username, computers.PCDate, computers.TimeZone, computers.OS, computers.WinDir, computers.Version, computers.BiosName, computers.BiosVer, computers.BiosMFG, computers.BiosFlash, computers.USB, computers.Tape, computers.Sound, computers.SCSI, computers.Serial, computers.Parallel, computers.IRQ, computers.DMA, computers.Address, computers.Ports, computers.Comment, computers.Permissions, computers.ServiceVersion, computers.LastContact, computers.Memory, computers.Video, computers.Processors, computers.Nic, computers.DNSInfo, computers.LastInventory, computers.CPUUsage, computers.TotalMemory, computers.MemoryAvail, computers.LocalAddress, computers.RouterAddress, computers.flags, computers.Modems, computers.DistributedApps, computers.Shares, computers.BrowseList, computers.VirusScanner, computers.VirusDefs, computers.VirusAP, computers.WindowsUpdate, computers.AssetTag, computers.UserAccounts, computers.Licenses, computers.LicensesInUse, computers.ContactID, computers.UpTime, computers.DataIn, computers.DataOut, computers.UPS, computers.Tweaks, computers.tempfiles, computers.Assetdate, computers.MAC, computers.DateAdded, computers.bandwidth, computers.LastUsername, computers.ScoreCPU, computers.ScoreD3D, computers.ScoreDisk, computers.ScoreGraphics, computers.ScoreMemory, computers.PowerProfiles, computers.CurrentPwrProfile, computers.SNMPCommunity, computers.FeatureFlags, computers.Tracker, computers.SNMPSysInfo, computers.CollectionTemplate, computers.DefaultRedirector, computers.ManagementPort, computers.ManagementIP, computers.IdleTime, computers.RunLevel, computers.WarrantyEnd, computers.ObjectSid, computers.CommentPriorityId from computers INNER JOIN clients on computers.ClientID = clients.ClientID INNER JOIN locations on computers.LocationID = locations.LocationID WHERE LastContact >= DATE_SUB(now(), INTERVAL 60 MINUTE)"
+  sql_response_format: table
