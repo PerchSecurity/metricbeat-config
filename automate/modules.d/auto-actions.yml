@@ -9,5 +9,5 @@
   hosts: ["root:password@tcp(127.0.0.1:3306)/labtech"]
 
   driver: "mysql"
-  sql_query: "select concat("action") as automate_source, concat("event") as perch_event_type, users.Name as users_name, auditactions.Name as auditactions_name, cacheactions.* from cacheactions INNER JOIN auditactions ON cacheactions.Action = auditactions.ActionID INNER JOIN users ON cacheactions.UserID = users.UserID WHERE cacheactions.HistoryDate >= DATE_SUB(now(), INTERVAL 1 MINUTE)"
+  sql_query: "select concat("action") as automate_source, concat("event") as automate_event_type, users.Name as users_name, auditactions.Name as auditactions_name, cacheactions.* from cacheactions INNER JOIN auditactions ON cacheactions.Action = auditactions.ActionID INNER JOIN users ON cacheactions.UserID = users.UserID WHERE cacheactions.HistoryDate >= DATE_SUB(now(), INTERVAL 1 MINUTE)"
   sql_response_format: table
