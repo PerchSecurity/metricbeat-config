@@ -1,7 +1,7 @@
 # Module: sql
 # Docs: https://www.elastic.co/guide/en/beats/metricbeat/7.8/metricbeat-module-sql.html
-# Software Inventory interval is controlled by Automate schedules. (hourly to daily)
-r
+# Computer Inventory interval is controlled by Automate schedules. (hourly to daily)
+
 - module: sql
   metricsets:
     - query
