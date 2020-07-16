@@ -10,6 +10,6 @@
   hosts: ["root:password@tcp(127.0.0.1:3306)/labtech"]
 
   driver: "mysql"
-  sql_query: "select * from v_users where LoginTime >= DATE_SUB(NOW(), INTERVAL 1 MINUTE) OR LogoutTime >= DATE_SUB(NOW(), INTERVAL 1 MINUTE)"
+  sql_query: "select concat("users") as automate_source, concat("auth login/logout") as automate_event_type, v_users.* from v_users where LoginTime >= DATE_SUB(NOW(), INTERVAL 1 MINUTE) OR LogoutTime >= DATE_SUB(NOW(), INTERVAL 1 MINUTE)"
   sql_response_format: table
   
