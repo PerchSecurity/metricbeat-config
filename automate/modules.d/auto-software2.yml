@@ -1,0 +1,13 @@
+# Module: sql
+# Docs: https://www.elastic.co/guide/en/beats/metricbeat/7.8/metricbeat-module-sql.html
+# Software Inventory interval is controlled by Automate schedules. (hourly to daily)
+
+- module: sql
+  metricsets:
+    - query
+  period: 60m
+  hosts: ["root:password@tcp(127.0.0.1:3306)/labtech"]
+
+  driver: "mysql"
+  sql_query: "select select concat("software") as automate_source, concat("inventory") as perch_event_type, clients.Name as clients_name, computers.Name as computers_name, computers.routeraddress as computers_routeraddress, computers.MAC as computers_MAC, software.* from software INNER JOIN computers on software.ComputerID = computers.ComputerID INNER JOIN clients on computers.ClientID = clients.ClientID INNER JOIN locations on computers.LocationID = locations.LocationID WHERE software.Last_date >= DATE_SUB(now(), INTERVAL 60 MINUTE)"
+  sql_response_format: table
