@@ -7,7 +7,7 @@
   metricsets:
     - query
   period: 1m
-  hosts: ["root:password@tcp(127.0.0.1:3306)/labtech"]
+  hosts: ["${perch-read-only-sql-user}:${perch-read-only-sql-pass}@tcp(${sql-server-ip}:${sql-server-port})/${sql-server-db}"]
 
   driver: "mysql"
   sql_query: "select concat("users") as automate_source, concat("auth login/logout") as automate_event_type, v_users.* from v_users where LoginTime >= DATE_SUB(NOW(), INTERVAL 1 MINUTE) OR LogoutTime >= DATE_SUB(NOW(), INTERVAL 1 MINUTE)"

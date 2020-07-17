@@ -6,7 +6,7 @@
   metricsets:
     - query
   period: 1m
-  hosts: ["root:password@tcp(127.0.0.1:3306)/labtech"]
+  hosts: ["${perch-read-only-sql-user}:${perch-read-only-sql-pass}@tcp(${sql-server-ip}:${sql-server-port})/${sql-server-db}"]
 
   driver: "mysql"
   sql_query: "select concat("action") as automate_source, concat("event") as automate_event_type, users.Name as users_name, auditactions.Name as auditactions_name, cacheactions.* from cacheactions INNER JOIN auditactions ON cacheactions.Action = auditactions.ActionID INNER JOIN users ON cacheactions.UserID = users.UserID WHERE cacheactions.HistoryDate >= DATE_SUB(now(), INTERVAL 1 MINUTE)"

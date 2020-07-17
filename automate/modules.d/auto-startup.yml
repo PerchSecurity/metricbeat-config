@@ -6,7 +6,7 @@
   metricsets:
     - query
   period: 60m
-  hosts: ["root:password@tcp(127.0.0.1:3306)/labtech"]
+  hosts: ["${perch-read-only-sql-user}:${perch-read-only-sql-pass}@tcp(${sql-server-ip}:${sql-server-port})/${sql-server-db}"]
 
   driver: "mysql"
   sql_query: "SELECT concat("startup") as automate_source, concat("inventory") as automate_event_type, clients.name as clients_name, computers.name as computers_name, autostartupdefs.Name as autostartupdefs_name, autostartup.* FROM autostartup INNER JOIN computers ON autostartup.ComputerID = computers.ComputerID INNER JOIN autostartupdefs ON autostartupdefs.AutoDefID = autostartup.AutoDefID INNER JOIN clients on computers.ClientID = clients.ClientID where autostartup.Last_date >= DATE_SUB(NOW(), INTERVAL 60 MINUTE)"
