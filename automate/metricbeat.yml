@@ -39,7 +39,7 @@ metricbeat.config.modules:
 output.elasticsearch:
   hosts: ["ingest.perchsecurity.com:443/elastic"]
   headers:
-    X-Perch-Header: "agent-token-from-perch"
+    X-Perch-Header: "${perch-client-token}"
   protocol: "https"
 
 # ================================= Processors =================================
