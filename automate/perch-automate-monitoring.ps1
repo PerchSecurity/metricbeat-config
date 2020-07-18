@@ -11,6 +11,7 @@ Read-Host "Press Enter to continue..."
 
 ##Download Metricbeat
 Write-Output "Downloading Metricbeat 7.8 MSI"
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Invoke-WebRequest -Uri "https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.8.0-windows-x86_64.msi" -OutFile "$env:TEMP\metricbeat-7.8.0-windows-x86_64.msi"
 
 ##Install Metricbeat
