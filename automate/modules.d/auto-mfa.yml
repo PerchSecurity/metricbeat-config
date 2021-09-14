@@ -6,9 +6,7 @@
   metricsets:
     - query
   period: 1m
-  hosts: ["tcp(${sql-server-ip}:${sql-server-port})/${sql-server-db}"]
-  username: "${perch-read-only-sql-user}"
-  password: "${perch-read-only-sql-pass}"
+  hosts: ["${perch-read-only-sql-user}:${perch-read-only-sql-pass}@tcp(${sql-server-ip}:${sql-server-port})/${sql-server-db}"]
 
   driver: "mysql"
   sql_query: 'select concat("mfa") as automate_source, concat("token created") as perch_event_type, users.name as users_name, automatemultifactorsecurity.UserId, automatemultifactorsecurity.ExpirationDate, automatemultifactorsecurity.CreatedBy, automatemultifactorsecurity.CreateDate from automatemultifactorsecurity INNER JOIN users on automatemultifactorsecurity.UserID = Users.UserID where CreateDate >= DATE_SUB(DATE_SUB(now(), INTERVAL -5 HOUR), INTERVAL 1 MINUTE)'
