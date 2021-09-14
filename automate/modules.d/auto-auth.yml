@@ -7,7 +7,9 @@
   metricsets:
     - query
   period: 1m
-  hosts: ["${perch-read-only-sql-user}:${perch-read-only-sql-pass}@tcp(${sql-server-ip}:${sql-server-port})/${sql-server-db}"]
+  hosts: ["tcp(${sql-server-ip}:${sql-server-port})/${sql-server-db}"]
+  username: "${perch-read-only-sql-user}"
+  password: "${perch-read-only-sql-pass}"
   
   driver: "mysql"   
   sql_query: 'select concat("auth") as automate_source, concat("event") as automate_event_type, userauthenticationlockoutstats.* from userauthenticationlockoutstats where UpdateDate >= DATE_SUB(DATE_SUB(now(), INTERVAL 1 MINUTE), INTERVAL -5 HOUR)'

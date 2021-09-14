@@ -6,8 +6,10 @@
 - module: sql
   metricsets:
     - query
-  period: 60m
-  hosts: ["${perch-read-only-sql-user}:${perch-read-only-sql-pass}@tcp(${sql-server-ip}:${sql-server-port})/${sql-server-db}"]
+  period: 1m
+  hosts: ["tcp(${sql-server-ip}:${sql-server-port})/${sql-server-db}"]
+  username: "${perch-read-only-sql-user}"
+  password: "${perch-read-only-sql-pass}"
 
   driver: "mysql"
   sql_query: 'select concat("software") as automate_source, concat("inventory") as automate_event_type, clients.Name as client_name, computers.Name as computers_name, computers.routeraddress as computers_routeraddress, computers.MAC as computers_MAC, software.* from software INNER JOIN computers on software.ComputerID = computers.ComputerID INNER JOIN clients on computers.ClientID = clients.ClientID INNER JOIN locations on computers.LocationID = locations.LocationID WHERE software.Last_date >= DATE_SUB(now(), INTERVAL 60 MINUTE)'
