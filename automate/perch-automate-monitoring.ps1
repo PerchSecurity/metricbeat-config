@@ -1,5 +1,5 @@
 #Requires -RunAsAdministrator
-$BinDestination = "C:\Program Files\Elastic\Beats\7.15.5\metricbeat"
+$BinDestination = "C:\Program Files\Elastic\Beats\7.17.5\metricbeat"
 $Destination = "C:\ProgramData\Elastic\Beats\metricbeat"
 $WebClient = New-Object System.Net.WebClient
 $baseRepoURL = "https://raw.githubusercontent.com/PerchSecurity/metricbeat-config/master/automate"
@@ -10,14 +10,14 @@ Write-Output "Instructions at https://perch.help/integrations/connectwise-automa
 Read-Host "Press Enter to continue..."
 
 ##Download Metricbeat
-Write-Output "Downloading Metricbeat 7.15.5 MSI"
+Write-Output "Downloading Metricbeat 7.17.5 MSI"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-Invoke-WebRequest -Uri "https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.17.5-windows-x86_64.msi" -OutFile "$env:TEMP\metricbeat-7.15.5-windows-x86_64.msi"
+Invoke-WebRequest -Uri "https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.17.5-windows-x86_64.msi" -OutFile "$env:TEMP\metricbeat-7.17.5-windows-x86_64.msi"
                         
 ##Install Metricbeat
-Write-Output "Installing Metricbeat 7.15.5"
+Write-Output "Installing Metricbeat 7.17.5"
 Write-Output "Press a key when Metricbeat install is finished"
-Start-Process "$env:TEMP\.\metricbeat-7.15.5-windows-x86_64.msi" -wait
+Start-Process "$env:TEMP\.\metricbeat-7.17.5-windows-x86_64.msi" -wait
 Write-Output "Press a key when Metricbeat install is finished"
 Stop-Service metricbeat
 Write-Output "Downloading Config Files"
