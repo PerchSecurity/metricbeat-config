@@ -1,0 +1,13 @@
+Repository Name: PerchSecurity/metricbeat-config
+Description: Config file for metricbeat agent
+Product: CW Siem
+Business Pillar: Cybersecurity
+Business Criticality: Med
+Product Owner: Sravya Mutnuru
+Engineering Lead: Robert Farmer
+Team Owner ID: 185
+Purpose: Reference
+Type: Documentation
+User Access: Internal
+CI Type: N/A
+Exceptions:
